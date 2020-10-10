@@ -18,17 +18,22 @@ Api backend for students assistant applications using express/knex/postgres/jest
 ## Check List
 
 - [X] Create a server folder
-  - [ ] Clone express knex boilerplate
-- [ ] Setup preferred folder structure
-  - [ ] Create controllers folder
-  - [ ] Create error handler
-  - [ ] Add GET `/` endpoint
+  - [x] Clone express knex boilerplate
+- [x] Setup preferred folder structure
+  - [x] Create controllers folder
+  - [x] Create error handler
+  - [x] Add GET `/` endpoint
 - [x] Create database
 - [x] Create user table migration
 - [x] Seed user table with sample data
 - [x] Connect to the database
   - [x] Create database connection file
-  - [ ] Create a queries file
+  - [x] Create a queries file
+- [x] Setup migrations test
+  - [x] Setup seeds
+  - [x] Add seeds
+- [x] Configure unit test
+  - [x] Fix errors from tests
 - [ ] List all users with GET /api/users
   - [ ] Create query
   - [ ] Create controller
@@ -65,24 +70,6 @@ Api backend for students assistant applications using express/knex/postgres/jest
 
 ### API endpoints
 
-## Deployment
-
-- Server
-
-  ```sh
-  cd /server
-  heroku login # login once
-  heroku create sta-server # Initializes heroku app and adds remote.
-  heroku addons:create heroku-postgresql:hobby-dev -app sta-server # add a postgres db addon to your heroku app where plane-name = hobby-dev
-  git init # initialize app
-  heroku git:remote -a sta-server # setup remote
-  git commit -am "deploy to heroku" # commit
-  git push heroku master # deploy latest code to heroku
-  heroku run knex migrate:latest # run migrations on production db
-  heroku run knex seed:run  # run seeds on production db
-  heroku open # open heroku url in browser
-  ```
-
 ## Development
 
 Run server
@@ -113,6 +100,22 @@ Knex setup npx
   cd /server
   npm run test # test with jest
 ```
+
+## Deployment
+
+  ```sh
+  cd /server
+  heroku login # login once
+  heroku create sta-server # Initializes heroku app and adds remote.
+  heroku addons:create heroku-postgresql:hobby-dev -app sta-server # add a postgres db addon to your heroku app where plane-name = hobby-dev
+  git init # initialize app
+  heroku git:remote -a sta-server # setup remote
+  git commit -am "deploy to heroku" # commit
+  git push heroku master # deploy latest code to heroku
+  heroku run knex migrate:latest # run migrations on production db
+  heroku run knex seed:run  # run seeds on production db
+  heroku open # open heroku url in browser
+  ```
 
 ### Useful Links
 
