@@ -7,7 +7,7 @@ function isValidProduct(product) {
     returnObj.error_message = 'invalid product title';
     return returnObj;
   }
-  if (isNaN(product.price) || product.price < 1) {
+  if (Number.isNaN(product.price) || product.price < 1) {
     returnObj.error_message = 'invalid product price';
     return returnObj;
   }

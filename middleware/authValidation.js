@@ -1,9 +1,14 @@
 const Joi = require('@hapi/joi');
 
+const setError = {
+  status: 400,
+  message: '',
+};
+
 module.exports = {
   validationMiddleware(req, res, next) {
     const schema = Joi.object({
-      userName: Joi.string().alphanum().min(3).max(30),
+      username: Joi.string().alphanum().min(3).max(30),
 
       email: Joi.string()
         .email({
@@ -20,49 +25,44 @@ module.exports = {
 
     if (error) {
       switch (error.details[0].context.key) {
-        case 'userName':
-          res.status(400).send({
-            error: `The Username provided failed to match the following rules:
+        case 'username':
+          setError.message = `The Username provided failed to match the following rules:
             <br>
             1. It must contain ONLY characters that are either a letters or numbers.
             <br>
             2. Should not contain special characters.
             <br>
             3. It must be at least 3 characters in length and not greater than 30 characters in length.
-          `,
-          });
+          `;
+          next(setError);
           break;
         case 'email':
-          res.status(400).send({
-            error: `You must provide a valid email address with the following requirements:
+          setError.message = `You must provide a valid email address with the following requirements:
             <br>
             1. It must contain ONLY characters that are either a letters or numbers.
             <br>
             2. Should match example@domain.extension.
             <br>
             3. Allowed extensions are ".com" and ".net".
-          `,
-          });
+          `;
+          next(setError);
           break;
         case 'password':
-          res.status(400).send({
-            error: `The password provided failed to match the following rules:
+          setError.message = `The password provided failed to match the following rules:
               <br>
               1. It must contain ONLY the following characters: lower case, upper case, numerics.
               <br>
               2. It must be at least 8 characters in length and not greater than 32 characters in length.
-            `,
-          });
+            `;
+          next(setError);
           break;
         case 'repeat_password':
-          res.status(400).send({
-            error: `The repeated password does not match the password.`,
-          });
+          setError.message = `The repeated password does not match the password.`;
+          next(setError);
           break;
         default:
-          res.status(400).send({
-            error: 'Invalid registration information!',
-          });
+          setError.message = 'Invalid registration information!';
+          next(setError);
       }
     } else {
       next();

@@ -4,11 +4,11 @@ const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 const User = require('../queries/usersQuery');
 
-const signToken = (user) => {
+const signToken = (userId) => {
   return jwt.sign(
     {
       iss: process.env.BASE_URL,
-      userId: user._id,
+      userId,
       picture: 'https://github.com/nuxt.png',
     },
     process.env.JWT_SECRET,
@@ -21,124 +21,123 @@ const signToken = (user) => {
 exports.signup = async (req, res, next) => {
   try {
     const hashedPassword = bcrypt.hashSync(req.body.password, saltRounds);
-
-    const user = new User({
-      userName: req.body.userName,
-      email: req.body.email,
+    const { username, email } = req.body;
+    const user = {
+      username,
+      email,
       password: hashedPassword,
-    });
-    const newUser = await user.save();
-
-    const token = signToken(newUser);
+    };
+    const newUserId = await User.signUp(user);
+    const token = signToken(newUserId);
     res.status(201).json({
-      type: 'success',
       message: 'User registration successful!',
-      newUser,
+      id: newUserId,
       token,
     });
   } catch (error) {
-    res.status(500).json({
-      type: 'error',
-      error,
-    });
+    next(error);
   }
 };
 
-exports.getUsers = async (req, res) => {
+exports.getUsers = async (req, res, next) => {
   try {
-    const users = await User.find({}, 'userName email createdAt').sort({
-      createdAt: -1,
-    });
+    const users = await User.getAll();
 
     res.status(200).json({
-      type: 'success',
       users,
     });
   } catch (error) {
-    res.status(500).json({ type: 'error', error });
+    next(error);
   }
 };
 
 exports.login = (req, res, next) => {
-  User.findOne({
-    email: req.body.email,
-  })
+  const { email, password } = req.body;
+  User.getOne(email)
     .then((user) => {
       if (!user) {
-        return res.status(403).json({
-          type: 'error',
-          error: 'User email not found, correct it or consider signing up',
-        });
+        const error = {
+          status: 403,
+          message: 'User email not found, correct it or consider signing up',
+        };
+        next(error);
       }
       bcrypt
-        .compare(req.body.password, user.password)
+        .compare(password, user.password)
         .then((valid) => {
           if (!valid) {
-            return res.status(403).json({ type: 'error', error: 'Incorrect password!' });
+            const error = {
+              status: 403,
+              message: 'Incorrect credentials!',
+            };
+            next(error);
           }
-          const token = signToken(user);
+          const token = signToken(user.id);
           res.status(200).json({
             message: 'Logged in successfully!',
-            type: 'success',
-            userId: user._id,
+            userId: user.id,
             token,
           });
         })
         .catch((error) => {
-          res.status(500).json({
-            type: 'error',
-            error,
-          });
+          next(error);
         });
     })
     .catch((error) => {
-      res.status(500).json({
-        type: 'error',
-        error,
-      });
+      next(error);
     });
 };
 
-exports.getSingleUser = async (req, res) => {
+exports.getSingleUser = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
-    if (!token)
-      return res.status(401).json({ type: 'error', error: 'Authorization token not found' });
-
+    if (!token) {
+      const error = {
+        status: 401,
+        message: 'Authorization token not found',
+      };
+      next(error);
+    }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    const user = await User.findOne({ _id: decoded.userId });
-    if (!user) return res.status(403).json({ type: 'error', error: 'User not found' });
+    const user = await User.findOne({ id: decoded.userId });
+    if (!user) {
+      const error = {
+        status: 403,
+        message: 'User not found',
+      };
+      next(error);
+    }
 
     const convertedEmailToName = user.email.match(/^([^@]*)@/)[1];
 
     const userDetails = {
-      id: user._id,
+      id: user.id,
       email: user.email,
       picture: decoded.picture,
       name: convertedEmailToName,
-      userName: user.userName,
+      username: user.username,
     };
-    res.status(200).json({ type: 'success', user: userDetails });
+    res.status(200).json({ user: userDetails });
   } catch (error) {
-    res.status(500).json({ type: 'error', error });
+    next(error);
   }
 };
 
-exports.logout = (req, res) => {
+exports.logout = (req, res, next) => {
   try {
-    res.status(200).json({ type: 'success', message: 'Logged Out Successfully!' });
+    res.status(200).json({ message: 'Logged Out Successfully!' });
   } catch (error) {
-    res.status(500).json({ type: 'error', error });
+    next(error);
   }
 };
 
-exports.deleteUser = async (req, res) => {
+exports.deleteUser = async (req, res, next) => {
   try {
     const id = req.params.userId;
-    const result = await User.deleteOne({ _id: id });
-    res.status(200).json({ type: 'success', result });
+    const result = await User.delete(id);
+    res.status(200).json({ result });
   } catch (error) {
-    res.status(500).json({ type: 'error', error });
+    next(error);
   }
 };

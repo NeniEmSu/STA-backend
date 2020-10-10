@@ -1,4 +1,4 @@
-const usersDB = require('../queries/users-query.js');
+const usersDB = require('../queries/baseTestQuery');
 
 // GET ALL USERS
 exports.getUsers = async (req, res, next) => {

@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
+
 const tableName = 'product';
 const { onUpdateTrigger } = require('../../knexfile');
 
-exports.up = async function (knex) {
+exports.up = async function (knex, promise) {
   await knex.schema.createTable(tableName, (table) => {
     table.increments();
     table.string('title').notNullable();
@@ -15,6 +17,6 @@ exports.up = async function (knex) {
   await knex.raw(onUpdateTrigger(tableName));
 };
 
-exports.down = function (knex) {
+exports.down = function (knex, promise) {
   return knex.schema.dropTableIfExists(tableName);
 };

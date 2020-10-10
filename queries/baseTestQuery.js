@@ -2,31 +2,31 @@ const db = require('../config/dbConfig.js');
 
 // GET ALL USERS
 const find = () => {
-  return db('users');
+  return db('test');
 };
 
 // GET SPECIFIC USER BY ID
 const findById = (id) => {
-  return db('users').where('id', id);
+  return db('test').where('id', id);
 
   // SQL RAW METHOD
-  // return db.raw(`SELECT * FROM users
+  // return db.raw(`SELECT * FROM test
   //                  WHERE id = ${id}`);
 };
 
 // ADD A USER
 const addUser = (user) => {
-  return db('users').insert(user, 'id');
+  return db('test').insert(user, 'id');
 };
 
 // UPDATE USER
 const updateUser = (id, post) => {
-  return db('users').where('id', id).update(post);
+  return db('test').where('id', id).update(post);
 };
 
 // REMOVE USER
 const removeUser = (id) => {
-  return db('users').where('id', id).del();
+  return db('test').where('id', id).del();
 };
 
 module.exports = {

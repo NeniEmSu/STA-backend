@@ -7,11 +7,11 @@ let environment = null;
 if (process.env.NODE_ENV === 'production') {
   environment = 'production';
   db = knex(knexConfig[environment]);
-} else if (process.env.NODE_ENV === 'development') {
-  environment = 'development';
+} else if (process.env.NODE_ENV === 'testing') {
+  environment = 'testing';
   db = knex(knexConfig[environment]);
 } else {
-  environment = 'testing';
+  environment = 'development';
   db = knex(knexConfig[environment]);
 }
 

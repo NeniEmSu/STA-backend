@@ -4,7 +4,7 @@ const app = require('../app');
 describe('app.js', () => {
   describe('index route', () => {
     it('should return status 200', async () => {
-      const user = await request(app).get('/').expect(200);
+      await request(app).get('/').expect(200);
     });
 
     it('should return a JSON object from the index route', async () => {

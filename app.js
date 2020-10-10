@@ -8,8 +8,9 @@ const cors = require('cors');
 const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
 
-const usersRouter = require('./routes/users-router.js');
+const usersRouter = require('./routes/user.js');
 const productsRoutes = require('./routes/products');
+const usersTestRouter = require('./routes/baseTest');
 
 // Middleware
 app.use(cors());
@@ -18,11 +19,12 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Routers
-app.use('/api/users', usersRouter);
+app.use('/api/', usersTestRouter);
+app.use('/api/auth', usersRouter);
 app.use('/api/products', productsRoutes);
 
 // Routes
-app.get('/', (req, res, next) => {
+app.get('/', (req, res) => {
   res.status(200).json({ hello: 'World!' });
 });
 
@@ -32,6 +34,8 @@ app.use((req, res, next) => {
 });
 
 // error handler
+// next is required as without it error handler breaks
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   // render the error page
   res.status(err.status || 500);

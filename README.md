@@ -34,28 +34,34 @@ Api backend for students assistant applications using express/knex/postgres/jest
   - [x] Add seeds
 - [x] Configure unit test
   - [x] Fix errors from tests
-- [ ] List all users with GET /api/users
-  - [ ] Create query
-  - [ ] Create controller
-  - [ ] Create route
-- [ ] Create auth middleware
-  - [ ] Create query for auth middleware
+- [x] List all users with GET /api/users
+  - [x] Create query
+  - [x] Create controller
+  - [x] Create route
+  - [ ] Write tests
+- [x] Create auth middleware
+  - [x] Auth middleware for protected routes
+  - [x] Validate auth route inputs
 - [ ] Sign up users with POST /api/users
   - [ ] Create query
   - [ ] Create controller
   - [ ] Create route
+  - [ ] Write tests
 - [ ] Login user with POST /api/users
   - [ ] Create query
   - [ ] Create controller
   - [ ] Create route
+  - [ ] Write tests
 - [ ] Logout user with POST /api/users
   - [ ] Create query
   - [ ] Create controller
   - [ ] Create route
+  - [ ] Write tests
 - [ ] Delete user with DELETE /api/users
   - [ ] Create query
   - [ ] Create controller
   - [ ] Create route
+  - [ ] Write tests
 - [ ] Deploy server to Heroku
   - [ ] Sign up and login to heroku
   - [ ] Install the heroku CLI
@@ -121,3 +127,4 @@ Knex setup npx
 
 - [Timestamps update](<https://dev.to/morz/knex-psql-updating-timestamps-like-a-pro-2fg6>)
 - [Stack overflow Timestamp trigger](<https://stackoverflow.com/questions/36728899/knex-js-auto-update-trigger>)
+- [Testing express api with jest & supertest](<https://dev.to/nedsoft/testing-nodejs-express-api-with-jest-and-supertest-1km6>)

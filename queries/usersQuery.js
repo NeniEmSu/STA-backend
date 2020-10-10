@@ -1,38 +1,24 @@
 const db = require('../config/dbConfig.js');
 
-// GET ALL USERS
-const find = () => {
-  return db('users');
-};
-
-// GET SPECIFIC USER BY ID
-const findById = (id) => {
-  return db('users').where('id', id);
-
-  // SQL RAW METHOD
-  // return db.raw(`SELECT * FROM users
-  //                  WHERE id = ${id}`);
-};
-
-// ADD A USER
-const addUser = (user) => {
-  return db('users').insert(user, 'id');
-};
-
-// UPDATE USER
-const updateUser = (id, post) => {
-  return db('users').where('id', id).update(post);
-};
-
-// REMOVE USER
-const removeUser = (id) => {
-  return db('users').where('id', id).del();
-};
-
 module.exports = {
-  find,
-  findById,
-  addUser,
-  updateUser,
-  removeUser,
+  getAll() {
+    return db('users');
+  },
+
+  getOne(id) {
+    return db('users').where('id', id).first();
+  },
+
+  async signUp(users) {
+    const idArray = await db('users').insert(users, 'id');
+    return idArray[0];
+  },
+
+  update(id, users) {
+    return db('users').where('id', id).update(users);
+  },
+
+  delete(id) {
+    return db('users').where('id', id).delete();
+  },
 };
