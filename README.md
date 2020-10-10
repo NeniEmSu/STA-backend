@@ -1,64 +1,120 @@
-# express-knex-postgres-boilerplate
+# Students Assistant Server
 
-Boilerplate code for quick setup for CRUD applications using express/knex/postgres/jest/supertest
+Api backend for students assistant applications using express/knex/postgres/jest/supertest
 
-##Setup - Detailed Instructions Below
+## Deployed
 
-1. Git clone the repo ```git clone [url]``` and remove origin ```git remote remove origin```
-2. npm install
-3. setup postgres backend
-4. Modify .env file to suit your backend and migrate/seed db
-  1. migrate tables ```npx knex migrate:latest```
-  2. run seeds ```npx knex seed:run```
-5. npm run server
-6. npm run test
-7. modify code to suit your needs
+- Client: <https://students-assistant.netlify.app/>
+- Server: <https://sta-server.herokuapp.com/>
 
-## Setup PostgreSQL
+## I'll be using
 
-### Homebrew (for macOS users)
+- Server:
+  - Postgre for the database
+  - knex.js for the database migrations, seeds and queries.
+  - express.js for the JSON routes
+  - Convert api to graphql
 
-If you dont have postgres follow this link (Follow directions until you're able to get into psql utility): https://www.codementor.io/engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb
+## Check List
 
-#### Create dev and test database (Mac)
+- [X] Create a server folder
+  - [ ] Clone express knex boilerplate
+- [ ] Setup preferred folder structure
+  - [ ] Create controllers folder
+  - [ ] Create error handler
+  - [ ] Add GET `/` endpoint
+- [x] Create database
+- [x] Create user table migration
+- [x] Seed user table with sample data
+- [x] Connect to the database
+  - [x] Create database connection file
+  - [ ] Create a queries file
+- [ ] List all users with GET /api/users
+  - [ ] Create query
+  - [ ] Create controller
+  - [ ] Create route
+- [ ] Create auth middleware
+  - [ ] Create query for auth middleware
+- [ ] Sign up users with POST /api/users
+  - [ ] Create query
+  - [ ] Create controller
+  - [ ] Create route
+- [ ] Login user with POST /api/users
+  - [ ] Create query
+  - [ ] Create controller
+  - [ ] Create route
+- [ ] Logout user with POST /api/users
+  - [ ] Create query
+  - [ ] Create controller
+  - [ ] Create route
+- [ ] Delete user with DELETE /api/users
+  - [ ] Create query
+  - [ ] Create controller
+  - [ ] Create route
+- [ ] Deploy server to Heroku
+  - [ ] Sign up and login to heroku
+  - [ ] Install the heroku CLI
+  - [ ] Create a heroku app
+  - [ ] Push to heroku
+  - [ ] View heroku logs
+- [ ] Add Postgres DB to Heroku
+  - [ ] Add postgres addon
+  - [ ] Add production connection to knex
+  - [ ] Run migrations on production DB
+  - [ ] Run seeds on production DB
 
-In terminal run the following commands:
+### API endpoints
 
-1. ```psql``` -- To get into postgreSQL utility
-2. ```CREATE DATABASE db-name;``` -- Creates development server
-3. ```CREATE DATABASE db-name-test;``` -- Creates testing server
-4. ```\q```
-5. CD into your repo
+## Deployment
 
-### Windows
+- Server
 
-If you dont have postgres follow this link: https://www.2ndquadrant.com/en/blog/pginstaller-install-postgresql/
+  ```sh
+  cd /server
+  heroku login # login once
+  heroku create sta-server # Initializes heroku app and adds remote.
+  heroku addons:create heroku-postgresql:hobby-dev -app sta-server # add a postgres db addon to your heroku app where plane-name = hobby-dev
+  git init # initialize app
+  heroku git:remote -a sta-server # setup remote
+  git commit -am "deploy to heroku" # commit
+  git push heroku master # deploy latest code to heroku
+  heroku run knex migrate:latest # run migrations on production db
+  heroku run knex seed:run  # run seeds on production db
+  heroku open # open heroku url in browser
+  ```
 
-#### Create dev and test databases (Windows)
+## Development
 
-Set up Postgres and create databases for both the development server (db-name) and testing server (db-name-test)
+Run server
 
-1. Open pgAdmin, sign in with your master password created during the set up of postgres.
-2. Create a server if needed, if already created, turn server on by right clicking and pressing "Connect Server"
-3. Once connected, look for the drop down for databases and right click to Create a database
-4. Create a database called 'db-name' for the development connection & (db-name-test) for the testing connection
-
-## Environmental Variables at Runtime
-
-Create a ".env" file at the root of your project and add the following for both DEV and TEST databases
-
+```sh
+  npm run dev #nodemon run server and watches for changes
 ```
-    POSTGRES_DEV_HOST=localhost
-    POSTGRES_DEV_PORT=5432
-    POSTGRES_DEV_USER=postgres
-    POSTGRES_DEV_PASSWORD= \_Insert your postgres password here*
-    POSTGRES_DEV_DATABASE=db-name
+
+Knex setup npx
+
+```sh
+  # Make migration
+    npx knex migrate:make migration_name
+  # Run migration
+    npx knex migrate:latest
+    npx knex migrate:latest --env testing
+  # Rollback migrations
+    npx knex migrate:rollback
+  # Make seed
+    npx knex seed:make seed_name
+  # Run seed
+    npx knex seed:run
 ```
 
+= Testing
+
+```sh
+  cd /server
+  npm run test # test with jest
 ```
-    POSTGRES_TEST_HOST=localhost
-    POSTGRES_TEST_PORT=5432
-    POSTGRES_TEST_USER=postgres
-    POSTGRES_TEST_PASSWORD= \_Insert your postgres password here*
-    POSTGRES_TEST_DATABASE=db-name-test
-```
+
+### Useful Links
+
+- [Timestamps update](<https://dev.to/morz/knex-psql-updating-timestamps-like-a-pro-2fg6>)
+- [Stack overflow Timestamp trigger](<https://stackoverflow.com/questions/36728899/knex-js-auto-update-trigger>)
