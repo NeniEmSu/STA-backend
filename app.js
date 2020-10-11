@@ -19,9 +19,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Routers
-app.use('/api/', usersTestRouter);
-app.use('/api/auth', usersRouter);
-app.use('/api/products', productsRoutes);
+app.use('/auth', usersRouter);
+app.use('/api/v1/test', usersTestRouter);
+app.use('/api/v1/products', productsRoutes);
 
 // Routes
 app.get('/', (req, res) => {
@@ -41,7 +41,7 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.json({
     message: err.message,
-    error: req.app.get('env') === 'development' ? err.stack : {},
+    stack: req.app.get('env') === 'development' ? err.stack : {},
   });
 });
 

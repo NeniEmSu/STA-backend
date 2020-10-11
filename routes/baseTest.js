@@ -2,14 +2,14 @@ const router = require('express').Router();
 
 const usersCtrl = require('../controllers/baseTestController');
 
-router.get('/test/', usersCtrl.getUsers);
+router.get('/', usersCtrl.getUsers);
 
-router.get('/test/:id', usersCtrl.getUser);
+router.get('/:id', usersCtrl.getUser);
 
-router.post('/test/', usersCtrl.addUser);
+router.post('/', usersCtrl.addUser);
 
-router.put('/test/:id', usersCtrl.updateUser);
+router.put('/:id', usersCtrl.updateUser);
 
-router.delete('/test/:id', usersCtrl.deleteUser);
+router.delete('/:id', usersCtrl.deleteUser);
 
 module.exports = router;
