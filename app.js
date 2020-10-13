@@ -9,7 +9,6 @@ const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
 
 const usersRouter = require('./src/routes/user.js');
-const productsRoutes = require('./src/routes/products');
 const usersTestRouter = require('./src/routes/baseTest');
 
 // Middleware
@@ -21,7 +20,6 @@ app.use(cookieParser());
 // Routers
 app.use('/auth', usersRouter);
 app.use('/api/v1/test', usersTestRouter);
-app.use('/api/v1/products', productsRoutes);
 
 // Routes
 app.get('/', (req, res) => {
