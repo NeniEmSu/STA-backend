@@ -3,5 +3,7 @@
   "semi": true,
   "arrowParens": "always",
   "singleQuote": true,
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "trailingComma": "es5",
+  "tabWidth": 2
 }
