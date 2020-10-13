@@ -11,6 +11,15 @@ function createNameTable(knex, tableName) {
   });
 }
 
+function createNameCodeTable(knex, tableName) {
+  return knex.schema.createTable(tableName, (table) => {
+    table.increments().notNullable();
+    table.string('name').notNullable().unique();
+    table.string('code').notNullable().unique();
+    addDefaultColumns(table);
+  });
+}
+
 function url(table, columnName) {
   table.string(columnName, 2000);
 }
@@ -36,6 +45,7 @@ function references(table, tableName, notNullable = true, columnName = '') {
 module.exports = {
   addDefaultColumns,
   createNameTable,
+  createNameCodeTable,
   url,
   email,
   references,
