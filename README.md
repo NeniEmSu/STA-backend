@@ -6,6 +6,7 @@ Api backend for students assistant applications using express/knex/postgres/jest
 
 - Client: <https://students-assistant.netlify.app/>
 - Server: <https://sta-server.herokuapp.com/>
+- Database model <https://app.lucidchart.com/invitations/accept/9e1edb07-7270-49a9-be45-faa034e2db53>
 
 ## I'll be using
 
@@ -15,7 +16,50 @@ Api backend for students assistant applications using express/knex/postgres/jest
   - express.js for the JSON routes
   - Convert api to graphql
 
-## Check List
+## Modeling SQL Database
+
+Every Record will have:
+Created At - timestamptz
+Updated At - timestamptz
+Deleted At - timestamptz
+
+How i'll name models and tables:
+
+- Models in singular i.e User Model
+- Tables in singular i.e User table
+
+## Entities in the students assistant system
+
+- [ ] User
+- [ ] Question
+- [ ] Payment
+- [ ] Feedback
+- [ ] Faq
+
+## Payment Gateways
+
+- [paymentwall](<https://www.paymentwall.com/products/subscriptions>)
+
+## Seed the Database
+
+- [ ] User
+- [ ] Countries
+- [ ] Ukraine States - Partial, more to do!
+- [ ] Location
+- [ ] Universities
+
+## API Endpoints
+
+- [ ] Users
+  - [x] Sign up
+  - [x] Login
+  - [ ] Logout
+  - [ ] Get One
+  - [x] Get all
+  - [ ] Update
+  - [ ] Delete
+
+### Check List
 
 - [X] Create a server folder
   - [x] Clone express knex boilerplate
@@ -42,26 +86,40 @@ Api backend for students assistant applications using express/knex/postgres/jest
 - [x] Create auth middleware
   - [x] Auth middleware for protected routes
   - [x] Validate auth route inputs
-- [ ] Sign up users with POST /api/users
+- [ ] Sign up users with POST /auth/users
   - [ ] Create query
   - [ ] Create controller
   - [ ] Create route
   - [ ] Write tests
-- [ ] Login user with POST /api/users
+- [ ] Login user with POST /auth/users
   - [ ] Create query
   - [ ] Create controller
   - [ ] Create route
   - [ ] Write tests
-- [ ] Logout user with POST /api/users
+- [ ] Logout user with POST /auth/users
   - [ ] Create query
   - [ ] Create controller
   - [ ] Create route
   - [ ] Write tests
-- [ ] Delete user with DELETE /api/users
+- [ ] Delete user with DELETE /auth/users
   - [ ] Create query
   - [ ] Create controller
   - [ ] Create route
   - [ ] Write tests
+- [ ] Forgot password /auth/forgotPassword
+  - [ ] Create query
+  - [ ] Create controller
+  - [ ] Create route
+  - [ ] Write tests
+- [ ] Reset password /auth/resetPassword
+  - [ ] Create query
+  - [ ] Create controller
+  - [ ] Create route
+  - [ ] Write tests
+- [x] Setup Docker
+  - [x] docker compose
+  - [x] .dockerignore
+  - [ ] test project on docker container
 - [ ] Deploy server to Heroku
   - [ ] Sign up and login to heroku
   - [ ] Install the heroku CLI
@@ -73,8 +131,6 @@ Api backend for students assistant applications using express/knex/postgres/jest
   - [ ] Add production connection to knex
   - [ ] Run migrations on production DB
   - [ ] Run seeds on production DB
-
-### API endpoints
 
 ## Development
 
@@ -128,3 +184,5 @@ Knex setup npx
 - [Timestamps update](<https://dev.to/morz/knex-psql-updating-timestamps-like-a-pro-2fg6>)
 - [Stack overflow Timestamp trigger](<https://stackoverflow.com/questions/36728899/knex-js-auto-update-trigger>)
 - [Testing express api with jest & supertest](<https://dev.to/nedsoft/testing-nodejs-express-api-with-jest-and-supertest-1km6>)
+- [Timestamp vs Timestamptz](<https://medium.com/building-the-system/how-to-store-dates-and-times-in-postgresql-269bda8d6403>)
+- [MVP basis](<https://www.thirdrocktechkno.com/blog/10-essential-steps-to-build-a-saas-mvp/>)
