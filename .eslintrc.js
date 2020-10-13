@@ -1,9 +1,9 @@
 module.exports = {
   env: {
-    browser: true,
+    node: true,
+    es6: true,
     commonjs: true,
     jest: true,
-    // es2021: true,
   },
   extends: ['airbnb-base', 'prettier', 'plugin:node/recommended'],
   parserOptions: {
@@ -19,6 +19,8 @@ module.exports = {
     'object-shorthand': 'off',
     'class-methods-use-this': 'off',
     'no-underscore-dangle': 'off',
+    // 'no-param-reassign': 0,
+    // 'no-return-assign': 0,
     // 'no-undef': 'warn',
     // 'linebreak-style': 0,
   },
