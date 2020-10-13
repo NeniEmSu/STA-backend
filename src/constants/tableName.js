@@ -1,0 +1,18 @@
+module.exports = {
+  user: 'user',
+  subject: 'subject',
+  question: 'question',
+  test_taken: 'test_taken',
+  question_type: 'question_type',
+  question_info: 'question_info',
+  faq: 'faq',
+  role: 'role',
+  title: 'title',
+  state: 'state',
+  country: 'country',
+  address: 'address',
+  payment: 'payment',
+  feedback: 'feedback',
+  university: 'university',
+  reset_password: 'reset_password',
+};
