@@ -8,9 +8,9 @@ const cors = require('cors');
 const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
 
-const usersRouter = require('./routes/user.js');
-const productsRoutes = require('./routes/products');
-const usersTestRouter = require('./routes/baseTest');
+const usersRouter = require('./src/routes/user.js');
+const productsRoutes = require('./src/routes/products');
+const usersTestRouter = require('./src/routes/baseTest');
 
 // Middleware
 app.use(cors());
