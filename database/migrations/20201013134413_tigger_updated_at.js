@@ -1,3 +1,6 @@
+/**
+ * @param {import('knex')} knex
+ */
 const ON_UPDATE_TIMESTAMP_FUNCTION = `
 CREATE OR REPLACE FUNCTION update_timestamp() RETURNS TRIGGER
 LANGUAGE plpgsql
