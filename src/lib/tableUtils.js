@@ -1,5 +1,5 @@
 function addDefaultColumns(table) {
-  table.timestamps(false, true);
+  table.timestamps(true, true);
   table.datetime('deleted_at');
 }
 
@@ -30,7 +30,7 @@ function email(table, columnName) {
 
 function references(table, tableName, notNullable = true, columnName = '') {
   const definition = table
-    .integer(`${columnName || tableName}_id`)
+    .bigInteger(`${columnName || tableName}_id`)
     .unsigned()
     .references('id')
     .inTable(tableName)
