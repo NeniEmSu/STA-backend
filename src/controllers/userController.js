@@ -26,6 +26,10 @@ exports.signup = async (req, res, next) => {
       username,
       email,
       password: hashedPassword,
+      role_id: 2,
+      title_id: 7,
+      country_id: 161,
+      university_id: 17,
     };
     const newUserId = await User.signUp(user);
     const token = signToken(newUserId);

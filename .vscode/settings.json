@@ -2,15 +2,24 @@
   "cSpell.words": [
     "Parens",
     "Roenz",
+    "Serializers",
+    "Timestamptz",
     "alphanum",
+    "automock",
+    "datetime",
+    "dockerignore",
     "knexfile",
+    "lcov",
     "linebreak",
     "neni",
     "ossp",
+    "paymentwall",
     "plpgsql",
     "postgres",
     "postgresql",
     "tlds",
+    "unmocked",
+    "zipcode",
     "ãàáäâẽèéëêìíïîõòóöôùúüûñç"
   ]
 }
