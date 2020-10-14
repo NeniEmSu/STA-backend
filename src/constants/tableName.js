@@ -1,5 +1,5 @@
 module.exports = {
-  user: 'user',
+  user: 'user_act',
   subject: 'subject',
   question: 'question',
   test_taken: 'test_taken',
