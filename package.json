@@ -4,10 +4,16 @@
   "description": "Students assistant applications using express/knex/postgres",
   "main": "server.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand",
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "lint": "eslint --fix --ext .js, --ignore-path .gitignore ."
+    "lint": "eslint --fix --ext .js, --ignore-path .gitignore .",
+    "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand",
+    "migrate": "npx knex migrate:latest",
+    "migrate:test": "npx knex migrate:latest --env testing",
+    "rollback": "npx knex migrate:rollback",
+    "rollback:test": "npx knex migrate:rollback --env testing",
+    "seed": "npx knex seed:run",
+    "seed:test": "npx knex seed:run --env testing"
   },
   "jest": {
     "testEnvironment": "node"
