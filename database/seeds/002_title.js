@@ -2,17 +2,23 @@ const tableNames = require('../../src/constants/tableName');
 
 const titles = ['Sir', 'Madam', 'Mr', 'Mrs', 'Ms', 'Miss', 'Dr', 'Professor'];
 
+// console.log(
+//   titles.map((title) => {
+//     return { name: title };
+//   })
+// );
+
 exports.seed = function (knex) {
   // Deletes ALL existing entries
   return knex(tableNames.title)
     .del()
     .then(function () {
       // Inserts seed entries
-      return knex(tableNames.title).insert([
+      return knex(tableNames.title).insert(
         titles.map((title) => {
           return { name: title };
-        }),
-      ]);
+        })
+      );
     });
 };
 
