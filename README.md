@@ -132,6 +132,71 @@ How i'll name models and tables:
   - [ ] Run migrations on production DB
   - [ ] Run seeds on production DB
 
+## Routes and Resources
+
+### Users Resource
+
+|URL|HTTP verb|Result|Admin only?|
+|---|---|---|---|
+/auth/users|POST|create a new user|No|
+/auth/users|GET|return all users|Yes|
+/auth/user|GET|return current user|No|
+/auth/users/:id|PUT|update current user|No|
+/auth/users/:id|DELETE|delete a user|Yes|
+
+### Login Resource
+
+|URL|HTTP verb|Result|Admin only?|
+|---|---|---|---|
+/auth/login|POST|return a new JSON web token that can be used to identify the current user|No|
+
+### Category Resource
+
+|URL|HTTP verb|Result|Admin only?|
+|---|---|---|---|
+/api/v1/categories|POST|create a new category|Yes|
+/api/v1/categories|GET|return all categories|No|
+/api/v1/categories/:id|GET|return a specific category|Yes|
+/api/v1/categories/:id|PUT|update a specific category|Yes|
+/api/v1/categories/:id|DELETE|delete a specific category|Yes|
+
+### Quiz Resource
+
+|URL|HTTP verb|Result|Admin only?|
+|---|---|---|---|
+/api/v1/quizzes|POST|create a new quiz|Yes|
+/api/v1/quizzes|GET|return all quizzes|No|
+/api/v1/quizzes/:id|GET|return a specific quiz|Yes|
+/api/v1/quizzes/:id|PUT|update a specific quiz|Yes|
+/api/v1/quizzes/:id|DELETE|delete a specific quiz|Yes|
+
+### Questions Resource
+
+|URL|HTTP verb|Result|Admin only?|
+|---|---|---|---|
+/api/v1/quizzes/:userQuizId/questions|POST|create a new question|Yes|
+/api/v1/quizzes/:userQuizId/questions|GET|return all questions|Yes|
+/api/v1/quizzes/:userQuizId/questions/:id|GET|return a specific question|Yes|
+/api/v1/quizzes/:userQuizId/questions/:id|PUT|update a specific question|Yes|
+/api/v1/quizzes/:userQuizId/questions/:id|DELETE|delete a specific question|Yes|
+
+### UserQuizzes Resource
+
+|URL|HTTP verb|Result|Admin only?|
+|---|---|---|---|
+/api/v1/user-quizzes|POST|Create a new user-quiz and associated user-answers|No|
+/api/v1/user-quizzes|GET|return all user-quizzes for current user|No|
+/api/v1/user-quizzes/:id|GET|return a specific user-quiz for current user|No|
+/api/v1/user-quizzes/:id|PUT|update a specific user-quiz for current user|Yes|
+/api/v1/user-quizzes/:id|DELETE|delete a specific user-quiz for current user|Yes|
+
+### UserAnswers Resource
+
+|URL|HTTP verb|Result|Admin only?|
+|---|---|---|---|
+/api/v1/user-quizzes/:userQuizId/user-answers/:id|PUT|update a specific user-answer|Yes|
+/api/v1/user-quizzes/:userQuizId/user-answers/:id|DELETE|delete a specific user-answer|Yes|
+
 ## Development
 
 Run server
@@ -187,3 +252,4 @@ Knex setup npx
 - [Timestamp vs Timestamptz](<https://medium.com/building-the-system/how-to-store-dates-and-times-in-postgresql-269bda8d6403>)
 - [MVP basis](<https://www.thirdrocktechkno.com/blog/10-essential-steps-to-build-a-saas-mvp/>)
 - [Design quiz db](<https://mysql.tutorials24x7.com/blog/guide-to-design-database-for-quiz-in-mysql>)
+- [Quiz api](<https://github.com/jtimwill/quiz-api>)
