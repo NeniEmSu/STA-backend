@@ -186,3 +186,4 @@ Knex setup npx
 - [Testing express api with jest & supertest](<https://dev.to/nedsoft/testing-nodejs-express-api-with-jest-and-supertest-1km6>)
 - [Timestamp vs Timestamptz](<https://medium.com/building-the-system/how-to-store-dates-and-times-in-postgresql-269bda8d6403>)
 - [MVP basis](<https://www.thirdrocktechkno.com/blog/10-essential-steps-to-build-a-saas-mvp/>)
+- [Design quiz db](<https://mysql.tutorials24x7.com/blog/guide-to-design-database-for-quiz-in-mysql>)

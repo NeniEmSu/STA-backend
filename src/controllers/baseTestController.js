@@ -16,6 +16,7 @@ exports.getUser = async (req, res, next) => {
   try {
     const user = await usersDB.findById(userId);
     if (user.length === 0) {
+      res.status(400);
       const error = new Error('The user with the specified id does not exist');
       next(error);
     } else {
@@ -30,6 +31,7 @@ exports.getUser = async (req, res, next) => {
 exports.addUser = async (req, res, next) => {
   const newUser = req.body;
   if (!newUser.name) {
+    res.status(400);
     const error = new Error('Please provide the name');
     next(error);
   } else {
@@ -46,6 +48,7 @@ exports.updateUser = async (req, res, next) => {
   const userId = req.params.id;
   const newChanges = req.body;
   if (!newChanges.name) {
+    res.status(400);
     const error = new Error('You are missing information');
     next(error);
   } else {

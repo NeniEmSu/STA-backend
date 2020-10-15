@@ -5,15 +5,20 @@ const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
 
-const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
+const helmet = require('helmet');
 
 const usersRouter = require('./src/routes/user.js');
 const usersTestRouter = require('./src/routes/baseTest');
 
+const { errorMessages, errorTypes } = require('./src/constants/errors');
+
 // Middleware
 app.use(cors());
 app.use(morgan('dev'));
+app.use(compression());
+app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
 
@@ -28,18 +33,23 @@ app.get('/', (req, res) => {
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  next(createError(404));
+  const error = new Error(`${req.originalUrl} - was not found`);
+  res.status(404);
+  next(error);
 });
 
 // error handler
 // next is required as without it error handler breaks
 // eslint-disable-next-line no-unused-vars
-app.use((err, req, res, next) => {
+app.use((error, req, res, next) => {
   // render the error page
-  res.status(err.status || 500);
+  const statusCode = res.statusCode === 200 ? errorTypes[error.name] || 500 : res.statusCode;
+  res.status(statusCode);
   res.json({
-    message: err.message,
-    stack: req.app.get('env') === 'development' ? err.stack : {},
+    status: statusCode,
+    message: errorMessages[error.name] || error.message,
+    stack: req.app.get('env') === 'production' ? '🥞🥞' : error.stack,
+    errors: error.errors || undefined,
   });
 });
 
