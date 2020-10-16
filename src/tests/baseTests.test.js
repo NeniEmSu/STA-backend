@@ -9,7 +9,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  await db.raw(`TRUNCATE TABLE ${tableNames.test} RESTART IDENTITY CASCADE`);
+  await db.raw(`TRUNCATE TABLE test RESTART IDENTITY CASCADE`);
 });
 
 describe('users endpoints', () => {

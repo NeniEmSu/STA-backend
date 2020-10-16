@@ -15,7 +15,7 @@ function createNameCodeTable(knex, tableName) {
   return knex.schema.createTable(tableName, (table) => {
     table.increments().notNullable();
     table.string('name').notNullable().unique();
-    table.string('code').notNullable().unique();
+    table.string('code').notNullable();
     addDefaultColumns(table);
   });
 }

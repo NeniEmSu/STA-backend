@@ -31,6 +31,7 @@ How i'll name models and tables:
 ## Entities in the students assistant system
 
 - [ ] User
+- [ ] Quiz
 - [ ] Question
 - [ ] Payment
 - [ ] Feedback
@@ -42,11 +43,10 @@ How i'll name models and tables:
 
 ## Seed the Database
 
-- [ ] User
-- [ ] Countries
+- [x] User
+- [x] Countries
 - [ ] Ukraine States - Partial, more to do!
-- [ ] Location
-- [ ] Universities
+- [x] Universities
 
 ## API Endpoints
 
@@ -254,3 +254,4 @@ Knex setup npx
 - [MVP basis](<https://www.thirdrocktechkno.com/blog/10-essential-steps-to-build-a-saas-mvp/>)
 - [Design quiz db](<https://mysql.tutorials24x7.com/blog/guide-to-design-database-for-quiz-in-mysql>)
 - [Quiz api](<https://github.com/jtimwill/quiz-api>)
+- [Knex cheatsheet](<https://devhints.io/knex>)
