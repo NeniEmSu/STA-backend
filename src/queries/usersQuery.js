@@ -7,20 +7,24 @@ module.exports = {
     return db(tableNames.user);
   },
 
-  getOne(id) {
-    return db(tableNames.user).where('id', id).first();
+  getById(id) {
+    return db(tableNames.user).where('uuid', id).first();
   },
 
-  async signUp(users) {
-    const idArray = await db(tableNames.user).insert(users, 'uuid');
+  getByEmail(email) {
+    return db(tableNames.user).where('email', email).first();
+  },
+
+  async signUp(user) {
+    const idArray = await db(tableNames.user).insert(user, 'uuid');
     return idArray[0];
   },
 
-  update(id, users) {
-    return db(tableNames.user).where('id', id).update(users);
+  update(id, user) {
+    return db(tableNames.user).where('uuid', id).update(user);
   },
 
   delete(id) {
-    return db(tableNames.user).where('id', id).delete();
+    return db(tableNames.user).where('uuid', id).del();
   },
 };

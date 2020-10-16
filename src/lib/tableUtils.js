@@ -30,7 +30,7 @@ function email(table, columnName) {
 
 function references(table, tableName, notNullable = true, columnName = '') {
   const definition = table
-    .bigInteger(`${columnName || tableName}_id`)
+    .integer(`${columnName || tableName}_id`)
     .unsigned()
     .references('id')
     .inTable(tableName)

@@ -12,7 +12,7 @@ exports.up = async function (knex, promise) {
 
   await knex.schema.createTable(tableNames.user, (table) => {
     table.increments();
-    table.uuid('uuid').notNullable().index().defaultTo(knex.raw('uuid_generate_v4()'));
+    table.uuid('uuid').index().defaultTo(knex.raw('uuid_generate_v4()'));
     table.string('username', 35).notNullable();
     email(table, 'email').notNullable().unique().index();
     table.string('password', 127).notNullable();
@@ -20,6 +20,7 @@ exports.up = async function (knex, promise) {
     table.string('first_name', 35);
     table.string('last_name', 35);
     table.string('tel', 15);
+    table.string('profile');
     table.timestamp('last_login');
     references(table, 'role', false);
     references(table, 'title', false);

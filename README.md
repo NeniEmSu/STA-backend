@@ -138,11 +138,12 @@ How i'll name models and tables:
 
 |URL|HTTP verb|Result|Admin only?|
 |---|---|---|---|
-/auth/users|POST|create a new user|No|
+/auth/signup|POST|create a new user|No|
 /auth/users|GET|return all users|Yes|
+/auth/users/count|GET|number of users|No|
 /auth/user|GET|return current user|No|
-/auth/users/:id|PUT|update current user|No|
-/auth/users/:id|DELETE|delete a user|Yes|
+/auth/users/update/:id|PUT|update current user|No|
+/auth/users/delete/:id|DELETE|delete a user|Yes|
 
 ### Login Resource
 

@@ -17,6 +17,8 @@ router.post('/login', authValidation.validationMiddleware, userController.login)
 
 router.post('/logout', userController.logout);
 
-router.delete('/delete/:userId', userController.deleteUser);
+router.put('/users/update/:userId', userController.updateUser);
+
+router.delete('/users/delete/:userId', userController.deleteUser);
 
 module.exports = router;

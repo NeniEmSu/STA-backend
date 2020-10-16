@@ -1,8 +1,10 @@
 {
   "cSpell.words": [
     "Parens",
+    "Polovoho",
     "Roenz",
     "Serializers",
+    "Ternopil",
     "Timestamptz",
     "alphanum",
     "automock",
@@ -17,6 +19,7 @@
     "plpgsql",
     "postgres",
     "postgresql",
+    "signup",
     "tlds",
     "unmocked",
     "zipcode",

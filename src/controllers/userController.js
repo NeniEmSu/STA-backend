@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
@@ -9,7 +10,7 @@ const signToken = (userId) => {
     {
       iss: process.env.BASE_URL,
       userId,
-      picture: 'https://github.com/nuxt.png',
+      avatar: 'https://github.com/nuxt.png',
     },
     process.env.JWT_SECRET,
     {
@@ -26,10 +27,7 @@ exports.signup = async (req, res, next) => {
       username,
       email,
       password: hashedPassword,
-      role_id: 2,
-      title_id: 7,
-      country_id: 161,
-      university_id: 17,
+      role_id: '2',
     };
     const newUserId = await User.signUp(user);
     const token = signToken(newUserId);
@@ -37,6 +35,27 @@ exports.signup = async (req, res, next) => {
       message: 'User registration successful!',
       id: newUserId,
       token,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.updateUser = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const { username, email, title_id, country_id, university_id, address_id } = req.body;
+    const user = {
+      username,
+      email,
+      title_id,
+      country_id,
+      university_id,
+      address_id,
+    };
+    await User.update(userId, user);
+    res.status(201).json({
+      message: 'User updated successful!',
     });
   } catch (error) {
     next(error);
@@ -57,7 +76,7 @@ exports.getUsers = async (req, res, next) => {
 
 exports.login = (req, res, next) => {
   const { email, password } = req.body;
-  User.getOne(email)
+  User.getByEmail(email)
     .then((user) => {
       if (!user) {
         const error = {
@@ -76,10 +95,10 @@ exports.login = (req, res, next) => {
             };
             next(error);
           }
-          const token = signToken(user.id);
+          const token = signToken(user.uuid);
           res.status(200).json({
             message: 'Logged in successfully!',
-            userId: user.id,
+            userId: user.uuid,
             token,
           });
         })
@@ -104,7 +123,7 @@ exports.getSingleUser = async (req, res, next) => {
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    const user = await User.findOne({ id: decoded.userId });
+    const user = await User.getById(decoded.userId);
     if (!user) {
       const error = {
         status: 403,
