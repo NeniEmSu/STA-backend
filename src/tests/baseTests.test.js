@@ -5,17 +5,18 @@ const tableNames = require('../constants/tableName');
 const db = require('../../config/dbConfig');
 
 beforeAll(async () => {
-  await db(tableNames.test).insert([{ name: 'Roenz' }, { name: 'Joe' }, { name: 'Bob' }]);
+  await db(tableNames.test).insert([{ name: 'Neni' }, { name: 'Babas' }, { name: 'Temi' }]);
 });
 
 afterAll(async () => {
-  await db.raw(`TRUNCATE TABLE test RESTART IDENTITY CASCADE`);
+  await db.raw('TRUNCATE TABLE test RESTART IDENTITY CASCADE');
 });
 
 describe('users endpoints', () => {
   describe('GET /', () => {
     it('should return 200', async () => {
-      await request(app).get('/api/v1/test').expect(200);
+      const response = await request(app).get('/api/v1/test').expect(200);
+      expect(response.type).toEqual('application/json');
     });
     it('should be an object/array', async () => {
       const response = await request(app).get('/api/v1/test').expect(200);
@@ -35,7 +36,7 @@ describe('users endpoints', () => {
       expect(typeof response.body).toBe('object');
     });
     it('should return the right user', async () => {
-      const expected = { id: 1, name: 'Roenz' };
+      const expected = { id: 1, name: 'Neni' };
       const response = await request(app).get('/api/v1/test/1').expect(200);
       expect(response.body[0].name).toBe(expected.name);
     });
@@ -52,14 +53,14 @@ describe('users endpoints', () => {
 
       expect(posting.body).toEqual([4]);
     });
-    it('its the right user', async () => {
+    it('is the right user', async () => {
       const getUser = await request(app).get('/api/v1/test/4');
       expect(getUser.body[0].name).toEqual('Test');
     });
   });
 
   describe('PUT /', () => {
-    it('changes name of user', async () => {
+    it('changes the name of user', async () => {
       const user = { name: 'updatedTest' };
       await request(app)
         .put('/api/v1/test/4')
@@ -71,7 +72,7 @@ describe('users endpoints', () => {
       const getUser = await request(app).get('/api/v1/test/4');
       console.log(getUser.body);
     });
-    it('its the right user', async () => {
+    it('is the right user', async () => {
       const getUser = await request(app).get('/api/v1/test/4');
       expect(getUser.body[0].name).toEqual('updatedTest');
     });

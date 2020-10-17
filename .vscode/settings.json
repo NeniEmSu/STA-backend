@@ -4,6 +4,7 @@
     "Polovoho",
     "Roenz",
     "Serializers",
+    "Temi",
     "Ternopil",
     "Timestamptz",
     "alphanum",
@@ -24,5 +25,6 @@
     "unmocked",
     "zipcode",
     "ãàáäâẽèéëêìíïîõòóöôùúüûñç"
-  ]
+  ],
+  "cSpell.language": "en,en-GB"
 }

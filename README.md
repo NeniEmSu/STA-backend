@@ -11,10 +11,11 @@ Api backend for students assistant applications using express/knex/postgres/jest
 ## I'll be using
 
 - Server:
-  - Postgre for the database
-  - knex.js for the database migrations, seeds and queries.
-  - express.js for the JSON routes
-  - Convert api to graphql
+  - [x] Postgre for the database
+  - [x] knex.js for the database migrations, seeds and queries.
+  - [x] express.js for the JSON routes
+  - [ ] Objection js for modeling and complex joins
+  - [ ] Convert api to graphql
 
 ## Modeling SQL Database
 
@@ -27,6 +28,7 @@ How i'll name models and tables:
 
 - Models in singular i.e User Model
 - Tables in singular i.e User table
+- Use user_act to avoid using user for table name user as it is a reserved word.
 
 ## Entities in the students assistant system
 
@@ -43,9 +45,12 @@ How i'll name models and tables:
 
 ## Seed the Database
 
+- [x] Role
+- [x] Title
 - [x] User
 - [x] Countries
-- [ ] Ukraine States - Partial, more to do!
+- [x] Ukraine States - Partial, more to do!
+- [x] Subject
 - [x] Universities
 
 ## API Endpoints
@@ -54,10 +59,11 @@ How i'll name models and tables:
   - [x] Sign up
   - [x] Login
   - [ ] Logout
-  - [ ] Get One
+  - [x] Get One
   - [x] Get all
-  - [ ] Update
-  - [ ] Delete
+  - [ ] Get users count
+  - [x] Update
+  - [x] Delete
 
 ### Check List
 
