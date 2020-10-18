@@ -261,3 +261,6 @@ Knex setup npx
 - [Design quiz db](<https://mysql.tutorials24x7.com/blog/guide-to-design-database-for-quiz-in-mysql>)
 - [Quiz api](<https://github.com/jtimwill/quiz-api>)
 - [Knex cheatsheet](<https://devhints.io/knex>)
+- [roles and permissions](<https://soshace.com/implementing-role-based-access-control-in-a-node-js-application/>)
+- [Krok questions](<https://www.drashiqtutorial.com/>)
+- [Exp](<https://anu4bindu.wordpress.com//>)

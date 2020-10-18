@@ -1,5 +1,6 @@
 {
   "cSpell.words": [
+    "Krok",
     "Parens",
     "Polovoho",
     "Roenz",
@@ -7,8 +8,10 @@
     "Temi",
     "Ternopil",
     "Timestamptz",
+    "accesscontrol",
     "alphanum",
     "automock",
+    "camelcase",
     "datetime",
     "dockerignore",
     "knexfile",

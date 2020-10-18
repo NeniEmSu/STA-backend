@@ -10,7 +10,6 @@ const signToken = (userId) => {
     {
       iss: process.env.BASE_URL,
       userId,
-      avatar: 'https://github.com/nuxt.png',
     },
     process.env.JWT_SECRET,
     {
