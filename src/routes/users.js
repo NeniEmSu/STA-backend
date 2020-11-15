@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const userController = require('../controllers/userController');
+const userCtrl = require('../controllers/userCtrl');
 
 const auth = require('../middleware/auth');
 // const grantAccess = require('../middleware/grantAccess');
@@ -12,33 +12,33 @@ router.get(
   '/user',
   auth,
   // grantAccess('readOwn', 'profile'),
-  userController.getSingleUser
+  userCtrl.getSingleUser
 );
 
 router.get(
   '/users',
   // auth, grantAccess('readAny', 'profile'),
-  userController.getUsers
+  userCtrl.getUsers
 );
 
-router.post('/signup', authValidation.validationMiddleware, userController.signup);
+router.post('/signup', authValidation.validationMiddleware, userCtrl.signup);
 
-router.post('/login', authValidation.validationMiddleware, userController.login);
+router.post('/login', authValidation.validationMiddleware, userCtrl.login);
 
-router.post('/logout', userController.logout);
+router.post('/logout', userCtrl.logout);
 
 router.put(
   '/users/update/:userId',
   auth,
   // grantAccess('updateAny', 'profile'),
-  userController.updateUser
+  userCtrl.updateUser
 );
 
 router.delete(
   '/users/delete/:userId',
   auth,
   // grantAccess('deleteAny', 'profile'),
-  userController.deleteUser
+  userCtrl.deleteUser
 );
 
 module.exports = router;

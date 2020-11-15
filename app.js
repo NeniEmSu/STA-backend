@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const compression = require('compression');
 const helmet = require('helmet');
 
-const usersRouter = require('./src/routes/user.js');
+const usersRouter = require('./src/routes/users.js');
 const statesRouter = require('./src/routes/states.js');
 const usersTestRouter = require('./src/routes/baseTest');
 
