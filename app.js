@@ -10,6 +10,7 @@ const compression = require('compression');
 const helmet = require('helmet');
 
 const usersRouter = require('./src/routes/user.js');
+const statesRouter = require('./src/routes/states.js');
 const usersTestRouter = require('./src/routes/baseTest');
 
 const { errorMessages, errorTypes } = require('./src/constants/errors');
@@ -25,6 +26,7 @@ app.use(cookieParser());
 // Routers
 app.use('/auth', usersRouter);
 app.use('/api/v1/test', usersTestRouter);
+app.use('/api/v1/states', statesRouter);
 
 // Routes
 app.get('/', (req, res) => {
@@ -43,7 +45,7 @@ app.use((req, res, next) => {
 // eslint-disable-next-line no-unused-vars
 app.use((error, req, res, next) => {
   // render the error page
-  const statusCode = res.statusCode === 200 ? errorTypes[error.name] || 500 : res.statusCode;
+  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   res.status(statusCode);
   res.json({
     status: statusCode,

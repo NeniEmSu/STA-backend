@@ -1,16 +1,16 @@
 const request = require('supertest');
 const app = require('../../app');
-const tableNames = require('../constants/tableName');
+// const tableNames = require('../constants/tableName');
 
-const db = require('../../config/dbConfig');
+// const db = require('../../config/dbConfig');
 
-beforeAll(async () => {
-  await db(tableNames.test).insert([{ name: 'Neni' }, { name: 'Babas' }, { name: 'Temi' }]);
-});
+// beforeAll(async () => {
+//   await db(tableNames.test).insert([{ name: 'Neni' }, { name: 'Babas' }, { name: 'Temi' }]);
+// });
 
-afterAll(async () => {
-  await db.raw('TRUNCATE TABLE test RESTART IDENTITY CASCADE');
-});
+// afterAll(async () => {
+//   await db.raw('TRUNCATE TABLE test RESTART IDENTITY CASCADE');
+// });
 
 describe('users endpoints', () => {
   describe('GET /', () => {
@@ -36,7 +36,7 @@ describe('users endpoints', () => {
       expect(typeof response.body).toBe('object');
     });
     it('should return the right user', async () => {
-      const expected = { id: 1, name: 'Neni' };
+      const expected = { id: 1, name: 'Bob' };
       const response = await request(app).get('/api/v1/test/1').expect(200);
       expect(response.body[0].name).toBe(expected.name);
     });

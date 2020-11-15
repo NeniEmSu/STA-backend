@@ -1,9 +1,9 @@
-const usersDB = require('../queries/baseTestQuery');
+const userQuery = require('../queries/baseTestQuery');
 
 // GET ALL USERS
 exports.getUsers = async (req, res, next) => {
   try {
-    const users = await usersDB.find();
+    const users = await userQuery.find();
     res.status(200).json(users);
   } catch (err) {
     next(err);
@@ -14,7 +14,7 @@ exports.getUsers = async (req, res, next) => {
 exports.getUser = async (req, res, next) => {
   const userId = req.params.id;
   try {
-    const user = await usersDB.findById(userId);
+    const user = await userQuery.findById(userId);
     if (user.length === 0) {
       res.status(400);
       const error = new Error('The user with the specified id does not exist');
@@ -36,7 +36,7 @@ exports.addUser = async (req, res, next) => {
     next(error);
   } else {
     try {
-      const user = await usersDB.addUser(newUser);
+      const user = await userQuery.addUser(newUser);
       res.status(201).json(user);
     } catch (err) {
       next(err);
@@ -53,7 +53,7 @@ exports.updateUser = async (req, res, next) => {
     next(error);
   } else {
     try {
-      const addChanges = await usersDB.updateUser(userId, newChanges);
+      const addChanges = await userQuery.updateUser(userId, newChanges);
       res.status(200).json(addChanges);
     } catch (err) {
       next(err);
@@ -64,7 +64,7 @@ exports.updateUser = async (req, res, next) => {
 exports.deleteUser = async (req, res, next) => {
   const userId = req.params.id;
   try {
-    const deleting = await usersDB.removeUser(userId);
+    const deleting = await userQuery.removeUser(userId);
     res.status(204).json(deleting);
   } catch (err) {
     next(err);
