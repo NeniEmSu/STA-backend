@@ -16,7 +16,7 @@ exports.getState = async (req, res, next) => {
   try {
     const state = await stateQuery.getById(stateId);
     if (!state) {
-      res.status(400);
+      res.status(404);
       const error = new Error('The state with the specified id does not exist');
       next(error);
     } else {

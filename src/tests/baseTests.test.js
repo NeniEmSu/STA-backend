@@ -1,5 +1,7 @@
 const request = require('supertest');
 const app = require('../../app');
+
+// Below commented lines functionality were substituted by the global test config.
 // const tableNames = require('../constants/tableName');
 
 // const db = require('../../config/dbConfig');

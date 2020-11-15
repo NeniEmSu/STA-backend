@@ -21,7 +21,11 @@ describe('GET /api/v1/states', () => {
     expect(response.body.id).toBe(1);
   });
 
+  it('should respond with a 400 is the id is invalid', async () => {
+    await supertest(app).get('/api/v1/states/hello').expect('Content-Type', /json/).expect(400);
+  });
+
   it('should respond with a 404 for a not found state', async () => {
-    await supertest(app).get('/api/v1/states/4200').expect('Content-Type', /json/).expect(400);
+    await supertest(app).get('/api/v1/states/4200').expect('Content-Type', /json/).expect(404);
   });
 });
