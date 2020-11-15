@@ -1,6 +1,6 @@
 const stateQuery = require('../queries/statesQuery');
 
-// GET ALL USERS
+// GET ALL STATES
 exports.getStates = async (req, res, next) => {
   try {
     const states = await stateQuery.getAll();
@@ -10,7 +10,7 @@ exports.getStates = async (req, res, next) => {
   }
 };
 
-// GET USER BY ID
+// GET STATE BY ID
 exports.getState = async (req, res, next) => {
   const stateId = req.params.id;
   try {

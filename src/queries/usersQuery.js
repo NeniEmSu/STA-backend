@@ -4,7 +4,7 @@ const tableNames = require('../constants/tableName');
 
 module.exports = {
   getAll() {
-    return db(tableNames.user);
+    return db(tableNames.user).select('uuid', 'username', 'email', 'last_login');
   },
 
   getById(id) {

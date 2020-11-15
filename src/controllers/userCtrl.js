@@ -112,17 +112,10 @@ exports.login = (req, res, next) => {
 
 exports.getSingleUser = async (req, res, next) => {
   try {
-    const token = req.headers.authorization;
-    if (!token) {
-      const error = {
-        status: 401,
-        message: 'Authorization token not found',
-      };
-      next(error);
-    }
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const { userId } = res.locals;
+    console.log(userId);
 
-    const user = await User.getById(decoded.userId);
+    const { user } = res.locals;
     if (!user) {
       const error = {
         status: 403,
@@ -130,17 +123,7 @@ exports.getSingleUser = async (req, res, next) => {
       };
       next(error);
     }
-
-    const convertedEmailToName = user.email.match(/^([^@]*)@/)[1];
-
-    const userDetails = {
-      id: user.id,
-      email: user.email,
-      picture: decoded.picture,
-      name: convertedEmailToName,
-      username: user.username,
-    };
-    res.status(200).json({ user: userDetails });
+    res.status(200).json({ user });
   } catch (error) {
     next(error);
   }

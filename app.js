@@ -9,9 +9,10 @@ const cookieParser = require('cookie-parser');
 const compression = require('compression');
 const helmet = require('helmet');
 
+const usersTestRouter = require('./src/routes/baseTest');
 const usersRouter = require('./src/routes/users.js');
 const statesRouter = require('./src/routes/states.js');
-const usersTestRouter = require('./src/routes/baseTest');
+const countriesRouter = require('./src/routes/countries.js');
 
 const { errorMessages, errorTypes } = require('./src/constants/errors');
 
@@ -23,15 +24,16 @@ app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
 
-// Routers
+// Routes
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'Hello there welcome to my students assistant backend api.👨‍🎓👩‍🎓🏠',
+  });
+});
 app.use('/auth', usersRouter);
 app.use('/api/v1/test', usersTestRouter);
 app.use('/api/v1/states', statesRouter);
-
-// Routes
-app.get('/', (req, res) => {
-  res.status(200).json({ hello: 'World!' });
-});
+app.use('/api/v1/countries', countriesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -45,7 +47,14 @@ app.use((req, res, next) => {
 // eslint-disable-next-line no-unused-vars
 app.use((error, req, res, next) => {
   // render the error page
-  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
+  let statusCode;
+  if (error.status) {
+    statusCode = error.status;
+  } else if (res.statusCode === 200) {
+    statusCode = 500;
+  } else {
+    statusCode = res.statusCode;
+  }
   res.status(statusCode);
   res.json({
     status: statusCode,

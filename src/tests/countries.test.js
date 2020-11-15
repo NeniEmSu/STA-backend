@@ -1,5 +1,4 @@
 const supertest = require('supertest');
-
 const app = require('../../app');
 
 describe('GET /api/v1/countries', () => {
@@ -12,7 +11,7 @@ describe('GET /api/v1/countries', () => {
     expect(response.body.length).toBeGreaterThan(0);
   });
 
-  it('should respond with an individual state', async () => {
+  it('should respond with an individual county', async () => {
     const response = await supertest(app)
       .get('/api/v1/countries/1')
       .expect('Content-Type', /json/)
@@ -25,7 +24,7 @@ describe('GET /api/v1/countries', () => {
     await supertest(app).get('/api/v1/countries/hello').expect('Content-Type', /json/).expect(400);
   });
 
-  it('should respond with a 404 for a not found state', async () => {
+  it('should respond with a 404 for a not found county', async () => {
     await supertest(app).get('/api/v1/countries/4200').expect('Content-Type', /json/).expect(404);
   });
 });

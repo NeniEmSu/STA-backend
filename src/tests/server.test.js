@@ -14,7 +14,9 @@ describe('app.js', () => {
     });
 
     it('should return a hello World! JSON', async () => {
-      const expectedBody = { hello: 'World!' };
+      const expectedBody = {
+        message: 'Hello there welcome to my students assistant backend api.👨‍🎓👩‍🎓🏠',
+      };
       const response = await request(app).get('/');
       expect(response.body).toEqual(expectedBody);
     });
