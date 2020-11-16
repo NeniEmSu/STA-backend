@@ -1,3 +1,4 @@
+const { Model } = require('objection');
 const knex = require('knex');
 const knexConfig = require('../knexfile');
 
@@ -14,5 +15,7 @@ if (process.env.NODE_ENV === 'production') {
   environment = 'development';
   db = knex(knexConfig[environment]);
 }
+
+Model.knex(db);
 
 module.exports = db;
