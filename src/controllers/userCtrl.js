@@ -5,6 +5,8 @@ const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 const User = require('../queries/usersQuery');
 
+const UserModel = require('../models/usersModel');
+
 const signToken = (userId) => {
   return jwt.sign(
     {
@@ -63,7 +65,9 @@ exports.updateUser = async (req, res, next) => {
 
 exports.getUsers = async (req, res, next) => {
   try {
-    const users = await User.getAll();
+    const users = await UserModel.query()
+      .select('uuid', 'email', 'username', 'created_at', 'updated_at')
+      .where('deleted_at', null);
 
     res.status(200).json({
       users,
